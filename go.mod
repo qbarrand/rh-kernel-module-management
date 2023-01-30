@@ -11,8 +11,8 @@ require (
 	github.com/google/go-containerregistry v0.11.0
 	github.com/google/go-containerregistry/pkg/authn/kubernetes v0.0.0-20220630175030-4d7b65b04609
 	github.com/mitchellh/hashstructure v1.1.0
-	github.com/onsi/ginkgo/v2 v2.4.0
-	github.com/onsi/gomega v1.24.0
+	github.com/onsi/ginkgo/v2 v2.7.1
+	github.com/onsi/gomega v1.25.0
 	github.com/openshift/api v0.0.0-20220525145417-ee5b62754c68
 	github.com/prometheus/client_golang v1.13.0
 	k8s.io/api v0.25.2
@@ -72,12 +72,12 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/vbatts/tar-split v0.11.2 // indirect
 	golang.org/x/crypto v0.0.0-20220315160706-3147a52a75dd // indirect
-	golang.org/x/net v0.1.0 // indirect
+	golang.org/x/net v0.5.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220718184931-c8730f7fcb92 // indirect
 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
-	golang.org/x/sys v0.1.0 // indirect
-	golang.org/x/term v0.1.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
+	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/term v0.4.0 // indirect
+	golang.org/x/text v0.6.0 // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.2.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
