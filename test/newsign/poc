@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+echo super-secret-value > secret
+
+readonly IMG=quay.io/quba/kmm-ci
+readonly KERNEL_VERSION=4.18.0-372.32.1.el8_6.x86_64
+
+yq .data.dockerfile < ../../ci/kmm-kmod-dockerfile.yaml | podman \
+  build \
+  -f - \
+  -t $IMG \
+  --build-arg KERNEL_VERSION="$KERNEL_VERSION" \
+  --build-arg DTK_AUTO=quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b3a6bf34704e171286da54da0875b8a896738e1a8a07688fe720a64069a930a9 \
+  -v "$PWD"/secret:/run/secrets/build-secret/ci-build-secret:z:ro \
+  .
+
+podman push $IMG
+
+yq 'select(document_index == 0).stringData.cert' ../../ci/secret_kmm-kmod-signing.yaml > cert.pem
+yq 'select(document_index == 1).stringData.key' ../../ci/secret_kmm-kmod-signing.yaml > key.pem
+
+podman \
+  build \
+  -f sign.Dockerfile \
+  --build-arg UNSIGNED_KMOD_0=/opt/lib/modules/$KERNEL_VERSION/kmm_ci_a.ko \
+  --build-arg UNSIGNED_KMOD_1=/opt/lib/modules/$KERNEL_VERSION/kmm_ci_b.ko \
+  -v "$PWD"/cert.pem:/run/secrets/cert.pem:z:ro \
+  -v "$PWD"/key.pem:/run/secrets/key.pem:z:ro \
+  .
