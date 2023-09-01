@@ -1003,6 +1003,7 @@ modprobe:
 						Capabilities: &v1.Capabilities{
 							Add: []v1.Capability{"SYS_MODULE"},
 						},
+						SELinuxOptions: &v1.SELinuxOptions{Type: "spc_t"},
 					},
 					VolumeMounts: []v1.VolumeMount{
 						{
