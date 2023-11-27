@@ -229,6 +229,29 @@ func extractTarToDisk(r io.Reader, dst string) error {
 			if err = f.Close(); err != nil {
 				return fmt.Errorf("could not close %s: %v", target, err)
 			}
+		case tar.TypeLink:
+		// TODO hard link
+		case tar.TypeSymlink:
+			linkName := header.Linkname
+
+			if filepath.IsLocal()
+
+			symLinkTarget := filepath.Join()
+			if err := os.Symlink(); err != nil {
+				return fmt.Errorf("could not create symbolic link: %v", err)
+			}
 		}
 	}
+}
+
+func getLinkTargetName(base, path string) string {
+	if filepath.IsAbs(path) {
+		cleanedPath := filepath.Clean(path)
+
+		fullPath := filepath.Join(base, cleanedPath)
+
+		return filepath.EvalSymlinks(fullPath)
+	}
+
+
 }
