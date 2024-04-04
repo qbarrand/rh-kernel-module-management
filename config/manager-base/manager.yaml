@@ -36,8 +36,6 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/master
                 operator: Exists
-      securityContext:
-        runAsNonRoot: true
       containers:
       - command:
         - /usr/local/bin/manager
@@ -76,6 +74,10 @@ spec:
           requests:
             cpu: 10m
             memory: 64Mi
+      securityContext:
+        capabilities:
+          drop: [NET_RAW]
+        runAsNonRoot: true
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10
       tolerations:
